@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero fade-in">
+    <h2>Welcome to SecureBank</h2>
+    <p>Modern banking solutions for your financial needs</p>
+    <div class="cta-buttons">
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Login to Your Account</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary">Open New Account</a>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature fade-in delay-1">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Banking</h3>
+        <p>Advanced encryption and security protocols to keep your financial data safe and secure.</p>
+    </div>
+    <div class="feature fade-in delay-2">
+        <div class="feature-icon">💳</div>
+        <h3>Easy Transactions</h3>
+        <p>Deposit and withdraw funds with just a few clicks. Manage your money effortlessly.</p>
+    </div>
+    <div class="feature fade-in delay-3">
+        <div class="feature-icon">🌐</div>
+        <h3>24/7 Access</h3>
+        <p>Access your accounts anytime, anywhere with our secure online banking platform.</p>
+    </div>
+</div>
+{% endblock %}

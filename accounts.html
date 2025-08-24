@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Your Accounts</h2>
+    <button onclick="document.getElementById('createAccountModal').style.display='block'" class="btn btn-primary">
+        Create New Account
+    </button>
+</div>
+
+{% if accounts %}
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Type</th>
+                <th>Balance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in accounts %}
+            <tr>
+                <td>{{ account.account_number }}</td>
+                <td>{{ account.account_type }}</td>
+                <td>${{ "%.2f"|format(account.balance) }}</td>
+                <td>
+                    <a href="{{ url_for('transactions') }}?account_id={{ account.id }}" class="btn btn-sm">View Transactions</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You don't have any accounts yet. Create your first account below.</p>
+{% endif %}
+
+<!-- Create Account Modal -->
+<div id="createAccountModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('createAccountModal').style.display='none'">&times;</span>
+        <h3>Create New Account</h3>
+        <form method="POST" action="{{ url_for('create_account') }}">
+            <div class="form-group">
+                <label for="account_type">Account Type:</label>
+                <select id="account_type" name="account_type" required>
+                    <option value="Savings">Savings</option>
+                    <option value="Checking">Checking</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

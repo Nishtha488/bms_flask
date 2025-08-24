@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2>Welcome, {{ full_name }}</h2>
+    <p>Here's an overview of your accounts</p>
+</div>
+
+<div class="summary-cards">
+    <div class="card">
+        <h3>Total Balance</h3>
+        <p class="amount">${{ "%.2f"|format(total_balance) }}</p>
+    </div>
+    <div class="card">
+        <h3>Number of Accounts</h3>
+        <p class="count">{{ accounts|length }}</p>
+    </div>
+</div>
+
+<div class="recent-accounts">
+    <h3>Your Accounts</h3>
+    {% if accounts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Type</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                <tr>
+                    <td>{{ account.account_number }}</td>
+                    <td>{{ account.account_type }}</td>
+                    <td>${{ "%.2f"|format(account.balance) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You don't have any accounts yet. <a href="{{ url_for('accounts') }}">Create one now</a></p>
+    {% endif %}
+</div>
+{% endblock %}
